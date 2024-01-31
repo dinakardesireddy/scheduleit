@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+spring:
+  sleuth:
+    enabled: true
+  datasource:
+    url: jdbc:h2:mem:schedule-db
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+    hikari:
+      connectionTimeout: 30000
+      minimumIdle: 5
+      maximumPoolSize: 10
+      idleTimeout: 30000
+      poolName: conferenceHikariCP
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization:  true
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: false
+
+management:
+  endpoints:
+    web:
+      base-path: /api/actuator
+      exposure:
+        include: "health"
+
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
